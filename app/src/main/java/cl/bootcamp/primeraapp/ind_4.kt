@@ -1,4 +1,19 @@
 package cl.bootcamp.primeraapp
+class Usuario(
+    val nombre: String,
+    val edad: Int,
+    val trabajo: String? = null,
+    val referencia: Usuario? = null
+) {
+    fun mostrarDatos() {
+        val datos = mutableListOf<String>()
+        datos.add(nombre)
+        datos.add(edad.toString())
+        trabajo?.let { datos.add(it) }
+        referencia?.let { datos.add("referenciado por: ${it.nombre}") }
+        println(datos.joinToString(" - "))
+    }
+}
 
 class ListaUsuarios {
     private val usuarios: MutableList<Usuario> = mutableListOf()
@@ -28,17 +43,14 @@ class ListaUsuarios {
     }
 }
 
-
 fun main() {
-
     val listaUsuarios = ListaUsuarios()
 
-    val usuario1 = Usuario("Alex", 30, "Desarrollado")
+    val usuario1 = Usuario("Alex", 30, "Desarrollador")
     val usuario2 = Usuario("Karina", 25)
     val usuario3 = Usuario("Luis", 40, "Doctor")
     val usuario4 = Usuario("Ana", 18, "Estudiante")
-    val usuario5 = Usuario("María", 65, referencia = usuario1)
-
+    val usuario5 = Usuario("María", 65,"Profesora", referencia = usuario1)
 
     listaUsuarios.agregarUsuario(usuario1)
     listaUsuarios.agregarUsuario(usuario2)
@@ -49,10 +61,8 @@ fun main() {
     println("\nLista de usuarios:")
     listaUsuarios.mostrarLista()
 
-
     println("\nEliminando a Luis de la lista:")
     listaUsuarios.eliminarUsuario("Luis")
-
 
     println("\nLista de usuarios después de eliminar:")
     listaUsuarios.mostrarLista()
