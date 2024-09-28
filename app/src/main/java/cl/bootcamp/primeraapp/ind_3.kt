@@ -21,7 +21,7 @@ class Usuario(
     fun mostrarDatosV2() {
         val datos = mutableListOf<String>()
         datos.add(nombre)
-        datos.add(edad.toString())
+        datos.add("$edad años")
         trabajo?.let { datos.add(it) }
         referencia?.let { datos.add("referenciado por: ${it.nombre}") }
         println(datos.joinToString(" - "))
