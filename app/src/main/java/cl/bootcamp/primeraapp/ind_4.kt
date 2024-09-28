@@ -1,19 +1,4 @@
 package cl.bootcamp.primeraapp
-class Usuario(
-    val nombre: String,
-    val edad: Int,
-    val trabajo: String? = null,
-    val referencia: Usuario? = null
-) {
-    fun mostrarDatos() {
-        val datos = mutableListOf<String>()
-        datos.add(nombre)
-        datos.add(edad.toString())
-        trabajo?.let { datos.add(it) }
-        referencia?.let { datos.add("referenciado por: ${it.nombre}") }
-        println(datos.joinToString(" - "))
-    }
-}
 
 class ListaUsuarios {
     private val usuarios: MutableList<Usuario> = mutableListOf()
@@ -37,10 +22,11 @@ class ListaUsuarios {
         if (usuarios.isEmpty()) {
             println("La lista de usuarios está vacía.")
         } else {
-            usuarios.forEach { it.mostrarDatos() }
+            usuarios.forEach { it.mostrarDatosV2() }
             println("----- Fin de la lista de usuarios -----")
         }
     }
+
 }
 
 fun main() {
@@ -50,7 +36,7 @@ fun main() {
     val usuario2 = Usuario("Karina", 25)
     val usuario3 = Usuario("Luis", 40, "Doctor")
     val usuario4 = Usuario("Ana", 18, "Estudiante")
-    val usuario5 = Usuario("María", 65,"Profesora", referencia = usuario1)
+    val usuario5 = Usuario("María", 65, referencia = usuario1)
 
     listaUsuarios.agregarUsuario(usuario1)
     listaUsuarios.agregarUsuario(usuario2)
